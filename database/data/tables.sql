@@ -27,7 +27,7 @@ CREATE TABLE trans._atm(
 
 CREATE TABLE trans._groupe(
   login VARCHAR(10) NOT NULL,
-  nom VARCHAR(50) NOT NULL PRIMARY KEY,
+  nom VARCHAR(75) NOT NULL PRIMARY KEY,
   dateDecreation TEXT, --certaines informations ne sont pas sous forme de date, et pas assez de precision (seulement l'année) pour utiliser le type date
   pays VARCHAR(50) NOT NULL,
   ville VARCHAR(50),
@@ -98,3 +98,6 @@ COPY trans._scene(nom,ville) FROM 'path/of/file/scenes.csv' DELIMITER ',' CSV;
 
 --la table des bars (tout ce qui appartient à la table lieu et qui n'est pas une scène)
 COPY trans._bar(nom,ville) FROM 'path/of/file/bars.csv' DELIMITER ',' CSV;
+
+--la table artistes
+COPY trans._groupe(pseudo,nom,pays,ville,dateDecreation) FROM 'path/of/file/artistes.csv' DELIMITER ',' CSV;
