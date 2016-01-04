@@ -29,3 +29,7 @@ cut -d';' -f23-24 Open_data_Artistes_Rencontres_Trans_Musicales_1979_2014.csv | 
 sort salles.csv | uniq > salle.csv
 mv salle.csv salles.csv
 ```
+## Pour les utilisateurs
+* Les différents login sont générés aléatoirement.
+* Les mails sont générés grâce au nom du groupe, concaténé à la chaîne '@groupeMusique.com' (à l'aide d'open office calc).
+* L'activation de l'utilisateur est faite aléatoirement à l'aide d'open office calc.

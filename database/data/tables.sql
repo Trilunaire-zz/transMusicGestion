@@ -99,5 +99,8 @@ COPY trans._scene(nom,ville) FROM 'path/of/file/scenes.csv' DELIMITER ',' CSV;
 --la table des bars (tout ce qui appartient à la table lieu et qui n'est pas une scène)
 COPY trans._bar(nom,ville) FROM 'path/of/file/bars.csv' DELIMITER ',' CSV;
 
+-- la table utilisateurs
+COPY trans._utilisateur(pseudo,mail,motDePasse,etat) FROM 'path/of/file/user.csv' DELIMITER ',' CSV;
+
 --la table artistes
 COPY trans._groupe(pseudo,nom,pays,ville,dateDecreation) FROM 'path/of/file/artistes.csv' DELIMITER ',' CSV;
