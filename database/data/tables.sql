@@ -77,12 +77,11 @@ CREATE TABLE trans._bar(
 CREATE TABLE trans._reservation(
   id SERIAL,
   etat TEXT NOT NULL,
-  h_debut DATE NOT NULL,
-  jour DATE NOT NULL,
+  h_reserv  DATE NOT NULL,
   ville VARCHAR(50) NOT NULL,
   nomLieu VARCHAR(100) NOT NULL,
   login VARCHAR(10) NOT NULL,
-  CONSTRAINT reservPK PRIMARY KEY (login,h_debut,jour,ville,nomLieu),
+  CONSTRAINT reservPK PRIMARY KEY (login,h_reserv,ville,nomLieu),
   CONSTRAINT reservationUser FOREIGN KEY (login) REFERENCES _utilisateur(login),
   CONSTRAINT reservationLieu FOREIGN KEY (ville,nomLieu) REFERENCES _lieu(ville,nom)
 );
@@ -104,3 +103,6 @@ COPY trans._utilisateur(pseudo,mail,motDePasse,etat) FROM 'path/of/file/user.csv
 
 --la table artistes
 COPY trans._groupe(pseudo,nom,pays,ville,dateDecreation) FROM 'path/of/file/artistes.csv' DELIMITER ',' CSV;
+
+--la table reservation
+COPY trans._reservation(etat,h_reserv,ville,nomLieu,login) FROM 'path/of/file/reservation.csv' DELIMITER ',' CSV;
