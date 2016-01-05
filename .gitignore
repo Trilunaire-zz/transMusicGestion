@@ -1,0 +1,5 @@
+#user Manual
+Site/user_guide/
+
+#Confidencial database informations
+Site/application/config/database.php
