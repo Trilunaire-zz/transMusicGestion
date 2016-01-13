@@ -5,10 +5,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* index.php?/$0 [PT,L]
 
-# Redirect on HTTP
-RewriteCond %{SERVER_PORT} 80
-RewriteRule ^(.*)$ http://trans.tristanlaurent.com/$1 [QSA,R=301,L]
-
-# Redirect on the trans.
-RewriteCond %{HTTP_HOST} !^trans\.tristanlaurent\.com [NC]
-RewriteRule (.*) http://trans.tristanlaurent.com/$1 [QSA,R=301,L]
+# Redirect on the www.
+# RewriteCond %{HTTP_HOST} !^www\.url_site\.com [NC]
+# RewriteRule (.*) http://trans.tristanlaurent.com/$1 [QSA,R=301,L]

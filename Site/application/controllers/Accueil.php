@@ -6,20 +6,47 @@ class Accueil extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->helper('form');
-		$this->load->library('form_validation');
-		$this->load->helper('email');
 	}
 	public function index()
 	{
-    $this->load->view('header');
-    $this->load->view('connection');
-    $this->load->view('footer');
+		$data = array('title' => "Accueil",
+					);
+		$this->load->view('header',$data);
+		if(isset($_SESSION['login'])){
+			if($this->user->isAdmin($this->session->userdata())){
+				$reserv = $this->reservation->getAll();
+				$this->load->view('atm_accueil',$reserv);
+			}else{
+				$reserv['reserv'] = $this->reservation->getMine($this->session->userdata());
+				$this->load->view('accueil',$reserv);
+			}
+		}else{
+	    $this->load->view('connection');
+		}
+		$this->load->view('footer');
+
 	}
 
   public function Connection()
   {
-    
+    if($this->form_validation->run() == FALSE){
+      $login = $this->input->post('login');
+      $pass = $this->input->post('pass');
+			if($this->user->userExist($login,$pass)){
+				$this->session->set_userdata('login',$login);
+			}
+
+
+    }
+
+    header('location:http://trans.tristanlaurent.com/');
   }
+
+	public function Deconnection()
+	{
+		session_destroy();
+
+		header('location:http://trans.tristanlaurent.com/');
+	}
 
 }
