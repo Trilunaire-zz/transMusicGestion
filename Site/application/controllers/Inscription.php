@@ -24,14 +24,13 @@ class Inscription extends CI_Controller{
   public function Inscription()
   {
     if($this->form_validation->run() == FALSE){
-      if($this->input->post('pass')==$this->input->post('passConfirm')){
-        $newUser = array('login' => $this->input->post('userName') , 'motdepasse' => $this->input->post('pass'), 'mail' => $this->input->post('mail'), 'etat' => False);
-        $this->User->signUp($newUser);
-        $data['message']=true;
-      }
-      else {
-        $data['erreur']=true;
-      }
+      $newUser = array( 'nom' => $this->input->post('userName'),
+                        'pays' => $this->input->post('pays'),
+                        'mail' => $this->input->post('mail'),
+                        );
+
+      $this->User->signUp($newUser);
+      $data['message']=true;
     }
     $this->index();
   }

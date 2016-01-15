@@ -26,13 +26,13 @@ class Lieu extends CI_Controller{
       //on envois au modèle les données de la vue
       $data = array();
       if($this->input->post('ville')!==""){
-        $data['_lieu.ville'] = $this->input->post('ville'); //le _lieu évite les ambiguités lors des requêtes (vu que les tables scenes et bar on aussi des colonnes ville et nom)
+        $data['ville'] = $this->input->post('ville'); //le _lieu évite les ambiguités lors des requêtes (vu que les tables scenes et bar on aussi des colonnes ville et nom)
       }
       if($this->input->post('nom')!==""){
-        $data['_lieu.nom'] = $this->input->post('nom'); //le _lieu évite les ambiguités lors des requêtes (vu que les tables scenes et bar on aussi des colonnes ville et nom)
+        $data['nom'] = $this->input->post('nom'); //le _lieu évite les ambiguités lors des requêtes (vu que les tables scenes et bar on aussi des colonnes ville et nom)
       }
       if($this->input->post('capacité')!=0){
-        $data['capacite>='] = $this->input->post('capacité');
+        $data['capacite<='] = $this->input->post('capacité');
       }
       if($this->input->post('accesHandi')){
         $data['acces_handi'] = $this->input->post('accesHandi');
@@ -42,7 +42,7 @@ class Lieu extends CI_Controller{
             $this->data['lieux']=$this->Salle->getBar($data);
           break;
         case 'scene' :
-            $this->data['lieux']=$this->Salle->getBar($data);
+            $this->data['lieux']=$this->Salle->getScene($data);
           break;
         default:
             $this->data['lieux']=$this->Salle->getPlace($data);

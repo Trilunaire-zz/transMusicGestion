@@ -1,6 +1,7 @@
 
-<?php include('liens.php');
-
+<?php include('liens.php');?>
+<div class="container-fluid"><br />
+<?php
 
   $valide = array();
   $encours = array();
@@ -8,11 +9,11 @@
   //print_r($reserv);
   foreach($reserv as $r):
     switch($r['etat']):
-      case "Validée" : array_push($valide,$r);
+      case "validée" : array_push($valide,$r);
         break;
-      case "en cours" : array_push($encours,$r);
+      case "attente" : array_push($encours,$r);
         break;
-      case "refuse" : array_push($refuse,$r);
+      case "refusée" : array_push($refuse,$r);
         break;
       default :
         break;
@@ -28,14 +29,10 @@
       foreach($tab as $r):
         ?>
         <tr>
-          <td><?php echo $r['nomlieu'];?></td>
+          <td><?php echo $r['salle'];?></td>
           <td><?php echo $r['ville'];?></td>
-
-          <?php /*
-            foreach($r as $elem):?>
-            <td><?php echo $elem;?></td>
-          <?php endforeach;
-          */ ?>
+          <td><?php echo $r['h_reserv'];?></td>
+          <td>Annuler</td>
         </tr>
         <?php
       endforeach;
@@ -48,3 +45,4 @@
   show($refuse, "Réservation refusée","#DF0000");
 
   ?>
+</div>

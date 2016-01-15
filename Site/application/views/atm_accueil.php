@@ -1,12 +1,6 @@
-<nav>
-  <ul class="list-inline">
-    <li><a href="http://trans.tristanlaurent.com/">Accueil</a></li>
-    <li><a href="http://trans.tristanlaurent.com/index.php/Lieu">Rechercher une salle</a></li>
-    <li><a href="http://trans.tristanlaurent.com/index.php/Accueil/Deconnection">Deconnexion</a></li>
-  </ul>
-</nav>
-
 <?php
+  include('liens.php');
+
 /*****************************************************************************
 *
                           Reservations en cours
@@ -32,17 +26,17 @@
    ?>
        <tr>
          <td><?php echo $r['nom'];?></td>
-         <td><?php echo $r['nomlieu'];?></td>
+         <td><?php echo $r['salle'];?></td>
          <td><?php echo $r['ville'];?></td>
          <td><?php echo $r['h_reserv'];?></td>
          <td>
 
-           <form class="inline" action="" method="post">
+           <form class="inline" action="http://trans.tristanlaurent.com/index.php/Reserver/accepter/<?php echo $r['id'];?>" method="post">
            <button type="submit" class="btn btn-default" aria-label="Left Align" >
                <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
              </button>
            </form>
-           <form class="inline" action="" method="post">
+           <form class="inline" action="http://trans.tristanlaurent.com/index.php/Reserver/refuser/<?php echo $r['id'];?>" method="post">
            <button type="submit" class="btn btn-default" aria-label="Left Align" >
                <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
              </button>
@@ -81,7 +75,7 @@
    ?>
        <tr>
          <td><?php echo $r['nom'];?></td>
-         <td><?php echo $r['nomlieu'];?></td>
+         <td><?php echo $r['salle'];?></td>
          <td><?php echo $r['ville'];?></td>
          <td><?php echo $r['h_reserv'];?></td>
          <td>
@@ -124,7 +118,7 @@
    ?>
        <tr>
          <td><?php echo $r['nom'];?></td>
-         <td><?php echo $r['nomlieu'];?></td>
+         <td><?php echo $r['salle'];?></td>
          <td><?php echo $r['ville'];?></td>
          <td><?php echo $r['h_reserv'];?></td>
          <td>

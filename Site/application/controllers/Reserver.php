@@ -16,11 +16,10 @@ class Reserver extends CI_Controller {
       if(is_null($place)){
         header('location:http://trans.tristanlaurent.com/index.php/Lieu');
       }else{
-        $info_salle = $this->salle->getInfos($place);
+        $data['info_salle'] = $this->salle->getInfos($place);
 
-        $reservations = $this->reservation->getSalleReserv($place);
-        print_r($info_salle);
-        print_r($reservations);
+        $data['reservations'] = $this->reservation->getSalleReserv($place);
+        $this->load->view('reservation',$data);
       }
 		}else{
 	    $this->load->view('connection');
@@ -29,5 +28,36 @@ class Reserver extends CI_Controller {
 
 	}
 
+	public function reservation($salle){
+		$info = array(
+			'lieu' => $salle,
+			'h_reserv' => $this->input->post('date'),
+			'login' => $this->session->userdata('login'),
+			'etat' => "attente"
+		);
 
+		$this->reservation->nouvelle($info);
+
+		header("location:http://trans.tristanlaurent.com");
+	}
+
+	public function accepter($id){
+		if(isset($_SESSION['login'])){
+			if($this->user->isAdmin($this->session->userdata())){
+				$this->reservation->accepter($id);
+
+			}
+		}
+		header("location:http://trans.tristanlaurent.com");
+	}
+
+	public function refuser($id){
+		if(isset($_SESSION['login'])){
+			if($this->user->isAdmin($this->session->userdata())){
+				$this->reservation->refuser($id);
+
+			}
+		}
+		header("location:http://trans.tristanlaurent.com");
+	}
 }
