@@ -5,19 +5,24 @@ class Inscription extends CI_Controller{
   public function __construct()
   {
     parent::__construct();
-    $this->load->helper('form');
-    $this->load->library('form_validation');
-    $this->load->helper('email');
-    $this->load->model('User');
+    if(!isset($_SESSION['lang'])){
+			$this->session->set_userdata('lang','fr');
+		}
   }
 
 
   public function index()
   {
-    $data = array('title' => "Inscription");
-    $this->load->view('header',$data);
-    $this->load->view('inscription',$data);
-    $this->load->view('footer');
+    if(!isset($_SESSION['login'])){
+      $data = array('title' => "Inscription",
+                    'lang' => $this->session->userdata('lang'),);
+      $this->load->view('header',$data);
+      $this->load->view('inscription',$data);
+      $this->load->view('footer');
+    }else{
+      header('location:http://trans.tristanlaurent.com');
+    }
+
   }
 
 
@@ -29,10 +34,32 @@ class Inscription extends CI_Controller{
                         'mail' => $this->input->post('mail'),
                         );
 
-      $this->User->signUp($newUser);
-      $data['message']=true;
+      if($this->input->post('dateCreation')!=""){
+        $newUser['datedecreation'] = $this->input->post('dateCreation');
+      }
+      if($this->input->post('Ville')!=""){
+        $newUser['ville'] = $this->input->post('Ville');
+      }
+      if($this->input->post('genre')!=""){
+        $newUser['genre'] = $this->input->post('genre');
+      }
+      if($this->input->post('elemPr')!=""){
+        $newUser['elements_principaux'] = $this->input->post('elemPr');
+      }
+      if($this->input->post('elemPo')!=""){
+        $newUser['elements_ponctuels'] = $this->input->post('elemPo');
+      }
+      if($this->input->post('site')!=""){
+        $newUser['siteweb'] = $this->input->post('site');
+      }
+      if($this->input->post('parentés')!=""){
+        $newUser['parentés'] = $this->input->post('parentés');
+      }
+      $this->session->set_userdata('login',$this->user->signUp($newUser));
+      header('location:http://trans.tristanlaurent.com/index/InscripSec');
+    }else{
+      $this->index();
     }
-    $this->index();
   }
 }
 ?>

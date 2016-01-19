@@ -21,7 +21,7 @@ class User extends CI_Model
                     ->where('login',$log['login'])
                     ->get()->result());
 
-    
+
   }
 
   public function userExist($userName, $password){
@@ -34,10 +34,7 @@ class User extends CI_Model
 
   public function signUp($data){ //les données sont pré-transformés en array
 
-    echo "Salut";
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
+    
 
     $user = array(
               'login' => str_split($data['nom'],10)[0],
@@ -45,17 +42,23 @@ class User extends CI_Model
               'mail' => $data['mail'],
               'etat' => TRUE,
             );
-    echo "<pre>";
-    print_r($user);
-    echo "</pre>";
+
 
     $artiste = array(
                 'login' => $user['login'],
                 'nom' => $data['nom'],
                 'pays' => $data['pays'],
+                'datedecreation' => $data['datedecreation'],
+        				'ville' => $data['ville'],
+        				'genre' => $data['genre'],
+        				'elements_principaux' => $data['elements_principaux'],
+        				'elements_ponctuels' => $data['elements_ponctuels'],
+        				'siteweb' => $data['siteweb'],
+        				'parentés' => $data['parentés'],
               );
-    $this->db->insert('trans._utilisateur',$user);
-    $this->db->insert('trans._groupe',$artiste);
+    $p1 = $this->db->insert('trans._utilisateur',$user);
+    $p2 = $this->db->insert('trans._groupe',$artiste);
+    return $user['login'];
   }
 
   public function getInfo($data){
@@ -66,6 +69,9 @@ class User extends CI_Model
                     ->result_array();
   }
 
+  public function setInfo($data){
+    return $this->db->set($data)->where('login',$this->session->userdata('login'))->update('trans._groupe');
+  }
 
 }
 

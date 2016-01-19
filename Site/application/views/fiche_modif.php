@@ -2,7 +2,7 @@
 <div class="container-fluid">
 <h1><?php echo $info['nom'];?></h1>
 
-<?php echo form_open('index.php/Fiche/modifier'); ?>
+<?php echo form_open('index.php/Fiche/set'); ?>
   <input class="form-control" type="text" name="dateCreation" value="<?php echo $info['datedecreation'];?>" placeholder="Détail de la date de création"/><br />
   <input class="form-control" type="text" name="Ville" value="<?php echo $info['ville'];?>" placeholder="Ville d'origine"/><br />
   <input class="form-control" type="text" name="genre" value="<?php echo $info['genre'];?>" placeholder="Genre musical"/><br />

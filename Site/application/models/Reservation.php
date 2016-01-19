@@ -86,6 +86,18 @@ class Reservation extends CI_Model{
     $this->db->set('etat','refusée')->where('id',$id)->update('trans._reservation');
   }
 
+  public function delete($data){
+    $this->db->delete('trans._reservation',$data); //$data must contain the login and the id that match with the reservation
+  }
+
+  public function alreadyReserv($data){
+    return $this->db->select()
+                    ->from('trans._reservation')
+                    ->join('trans._bar','_bar.id=_reservation.lieu','inner')
+                    ->where($data)
+                    ->get()
+                    ->result_array();
+  }
 }
 
 ?>

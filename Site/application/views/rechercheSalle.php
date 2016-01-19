@@ -1,4 +1,6 @@
 <?php include('liens.php');?>
+<script src="http://trans.tristanlaurent.com/assets/jquery-2.2.0.min.js"></script>
+<script src="http://trans.tristanlaurent.com/assets/css/bootstrap-datepicker-1.5.1-dist/js/bootstrap-datepicker.js"></script>
 
 <div class="container-fluid">
   <h2>Rechercher des salles</h2>
@@ -10,9 +12,15 @@
         <input class="form-control" type="text" name="ville" placeholder="Ville recherchée"/><br />
         <input class="form-control" type="text" name="nom" placeholder="Nom de salle recherché"/><br />
         <input class="form-control" type="number" name="capacité" placeholder="Capacité recherchée"/><br />
+        <div class="input-group date" data-provide="datepicker" data-date-start-date="12/15/2016" data-date-end-date="12/18/2016" data- >
+          <input type="text" class="form-control">
+          <div class="input-group-addon">
+              <span class="glyphicon glyphicon-th"></span>
+          </div>
+        </div>
       </div>
       <div class="block_inline">
-        <label>Accès handicapés <input type="checkbox" value="false" name="accesHandi" />
+        <label>Accès handicapés <input type="checkbox" value="true" name="accesHandi" />
         </label>
         <br />
         <label>Bar <input class="radio-inline" type="radio" value="bar" name="typeSalle" />
@@ -62,3 +70,7 @@
   }
   ?>
 </div>
+
+<script type="text/javascript">
+  $(".datepicker").datepicker();
+</script>

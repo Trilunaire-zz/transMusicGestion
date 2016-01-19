@@ -6,10 +6,14 @@ class Accueil extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		if(!isset($_SESSION['lang'])){
+			$this->session->set_userdata('lang','fr');
+		}
 	}
 	public function index()
 	{
 		$data = array('title' => "Accueil",
+									'lang' => $this->session->userdata('lang'),
 					);
 		$this->load->view('header',$data);
 		if(isset($_SESSION['login'])){
@@ -49,4 +53,8 @@ class Accueil extends CI_Controller {
 		header('location:http://trans.tristanlaurent.com/');
 	}
 
+	public function SetLang(){
+		$this->session->set_userdata('lang',$this->input->post('language'));
+		header('location:http://'.$this->input->post('addr'));
+	}
 }

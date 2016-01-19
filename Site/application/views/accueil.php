@@ -32,7 +32,13 @@
           <td><?php echo $r['salle'];?></td>
           <td><?php echo $r['ville'];?></td>
           <td><?php echo $r['h_reserv'];?></td>
-          <td>Annuler</td>
+          <td>
+            <form class="inline" action="http://trans.tristanlaurent.com/index.php/Reserver/refuser/<?php echo $r['id'];?>" method="post">
+              <button type="submit" class="btn btn-default" aria-label="Left Align" >
+               <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+              </button>
+            </form>
+          </td>
         </tr>
         <?php
       endforeach;

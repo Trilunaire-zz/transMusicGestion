@@ -6,14 +6,14 @@ class Lieu extends CI_Controller{
 
   public function __construct(){
     parent::__construct();
-    $this->load->helper('form');
-    $this->load->library('form_validation');
-    $this->load->model('Salle');
-    // $this->load->model('Salle');
+    if(!isset($_SESSION['lang'])){
+			$this->session->set_userdata('lang','fr');
+		}
     $this->data = array('title' => "Rechercher des salles");
   }
 
   public function index(){
+    $this->data['lang'] = $this->session->userdata('lang');
     $this->load->view('header',$this->data);
     $this->load->view('rechercheSalle',$this->data);
     $this->load->view('footer');
@@ -39,13 +39,13 @@ class Lieu extends CI_Controller{
       }
       switch ($this->input->post('typeSalle')) {
         case 'bar':
-            $this->data['lieux']=$this->Salle->getBar($data);
+            $this->data['lieux']=$this->salle->getBar($data);
           break;
         case 'scene' :
-            $this->data['lieux']=$this->Salle->getScene($data);
+            $this->data['lieux']=$this->salle->getScene($data);
           break;
         default:
-            $this->data['lieux']=$this->Salle->getPlace($data);
+            $this->data['lieux']=$this->salle->getPlace($data); 
           break;
       }
 
