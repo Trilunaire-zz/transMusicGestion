@@ -15,7 +15,7 @@ class Salle extends CI_Model{
   }
 
   public function getPlace($data){
-    print_r($data);
+
     return $this->db->select('*')
                       ->from('trans._lieu')
                       ->where($data)
@@ -25,7 +25,7 @@ class Salle extends CI_Model{
   }
 
   public function getBar($data){
-    echo "BAR";
+
     return $this->db->select('*')
                       ->from('trans._lieu')
                       ->join('trans._bar','_bar.id=_lieu.id','inner')
@@ -35,7 +35,7 @@ class Salle extends CI_Model{
   }
 
   public function getScene($data){
-    echo "SCENE";
+
     return $this->db->select('*')
                       ->from('trans._lieu')
                       ->join('trans._scene','_scene.id=_lieu.id','inner')
@@ -43,6 +43,15 @@ class Salle extends CI_Model{
                       ->limit(3)
                       ->get()->result_array();
   }
+
+  // public function getPlaceWithoutReservation($data,$hourData){
+  //   return $this->db->select('_lieu.id','ville','nom','capacite','acces_handi','numresponsable')
+  //                   ->from('trans._lieu')
+  //                   ->where($data)
+  //                   /*FIXME: SIMULE an EXCEPT query like:
+  //                   select (_lieu.id,ville,nom,capacite,acces_handi,numresponsable) from _lieu where ville = 'Rennes' EXCEPT (select (_lieu.id,ville,nom,capacite,acces_handi,numresponsable) from _reservation INNER JOIN _lieu on _reservation.lieu=_lieu.id WHERE EXTRACT('DAY' from h_reserv)='16');*/
+  //
+  // }
 }
 
 ?>

@@ -30,6 +30,7 @@ class Fiche extends CI_Controller {
 	public function modifier(){
 		if(isset($_SESSION['login']) && !($this->user->isAdmin($this->session->userdata()))){
       $data = array('title' => "Fiche personnelle",
+										'lang' => $this->session->userdata('lang'),
             );
       $infos = $this->user->getInfo($this->session->userdata('login'));
 			$user['info'] = $infos[0];

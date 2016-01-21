@@ -19,6 +19,7 @@ class Accueil extends CI_Controller {
 		if(isset($_SESSION['login'])){
 			if($this->user->isAdmin($this->session->userdata())){
 				$reserv = $this->reservation->getAll();
+				$reserv['lang'] = $this->session->userdata('lang');
 				$this->load->view('atm_accueil',$reserv);
 			}else{
 				$reserv['reserv'] = $this->reservation->getMine($this->session->userdata());

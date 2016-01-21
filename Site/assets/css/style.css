@@ -1,21 +1,84 @@
+body
+{
+  background-image: url("http://trans.tristanlaurent.com/assets/pics/background.jpg");
+  background-attachment: fixed;
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+}
+
+#conteneur
+{
+  background : rgb(255,255,255);
+  margin-right: 15%;
+  margin-left: 15%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  min-height: 600px;
+}
+
 .inline
 {
     display: inline-block;
 }
 .block_inline
 {
-    width : 300px;
+    width : 40%;
     display: inline-block;
     vertical-align: top;
+    margin-left:4%;
+    margin-right:4%;
 }
+#entete
+{
+  background: rgba(100,100,100,0.8);
+  width: 100%;
+  z-index: 42;
+  height: 40px;
+  --position: absolute;
+  --top: 0px;
 
+}
+#entete h4
+{
+  color: white;
+  text-align: center;
+  display: inline-block;
+  position: absolute;
+  left: 35%;
+  width: 30%;
+}
 #langues
 {
     position: absolute;
-    top: 0px;
+    display: inline-block;
+    position: absolute;
     right: 0px;
+    padding: 2px;
 }
 #langues form
 {
   display: inline-block;
+}
+
+footer
+{
+  color: rgb(200,200,200);
+  height: 150px;
+  width: 100%;
+  background: rgba(50, 50, 50, 0.5);
+  text-align: center;
+}
+#dev
+{
+  position: absolute;
+  right: 20px;
+  width: 20%;
+  text-align: right;
+}
+footer nav
+{
+  position: absolute;
+  left: 20px;
+  width: 20%;
+  text-align: left;
 }

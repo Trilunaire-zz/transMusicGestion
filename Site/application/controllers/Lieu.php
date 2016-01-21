@@ -37,15 +37,32 @@ class Lieu extends CI_Controller{
       if($this->input->post('accesHandi')){
         $data['acces_handi'] = $this->input->post('accesHandi');
       }
+      // if($this->input->post('recherchehoraire')=="true"){
+      //   $hourData=array();
+      //   $hourData['EXTRACT(\'DAY\' FROM h_reserv)'] = $this->input->post('day');
+      //   $hourData['EXTRACT(\'HOUR\' FROM h_reserv)'] = $this->input->post('hour');
+      // }
       switch ($this->input->post('typeSalle')) {
         case 'bar':
-            $this->data['lieux']=$this->salle->getBar($data);
+            if(isset($hourData)){//si on a défini une heure spécifique
+              $this->data['lieux']=$this->salle->getBarWithoutReservation($data,$hourData);
+            }else{
+              $this->data['lieux']=$this->salle->getBar($data);
+            }
           break;
         case 'scene' :
+          if(isset($hourData)){//si on a défini une heure spécifique
+            $this->data['lieux']=$this->salle->getSceneWithoutReservation($data,$hourData);
+          }else{
             $this->data['lieux']=$this->salle->getScene($data);
+          }
           break;
         default:
-            $this->data['lieux']=$this->salle->getPlace($data); 
+          if(isset($hourData)){//si on a défini une heure spécifique
+            $this->data['lieux']=$this->salle->getPlaceWithoutReservation($data,$hourData);
+          }else{
+            $this->data['lieux']=$this->salle->getPlace($data);
+          }
           break;
       }
 
