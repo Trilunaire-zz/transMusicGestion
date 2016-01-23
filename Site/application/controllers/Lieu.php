@@ -37,11 +37,11 @@ class Lieu extends CI_Controller{
       if($this->input->post('accesHandi')){
         $data['acces_handi'] = $this->input->post('accesHandi');
       }
-      // if($this->input->post('recherchehoraire')=="true"){
-      //   $hourData=array();
-      //   $hourData['EXTRACT(\'DAY\' FROM h_reserv)'] = $this->input->post('day');
-      //   $hourData['EXTRACT(\'HOUR\' FROM h_reserv)'] = $this->input->post('hour');
-      // }
+      if($this->input->post('recherchehoraire')=="true"){
+        $hourData=array();
+        $hourData['EXTRACT(\'DAY\' from h_reserv)='] = $this->input->post('day');
+        $hourData['EXTRACT(\'HOUR\' from h_reserv)='] = $this->input->post('hour');
+      }
       switch ($this->input->post('typeSalle')) {
         case 'bar':
             if(isset($hourData)){//si on a défini une heure spécifique

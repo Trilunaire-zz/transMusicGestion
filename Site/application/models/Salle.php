@@ -44,14 +44,75 @@ class Salle extends CI_Model{
                       ->get()->result_array();
   }
 
-  // public function getPlaceWithoutReservation($data,$hourData){
-  //   return $this->db->select('_lieu.id','ville','nom','capacite','acces_handi','numresponsable')
-  //                   ->from('trans._lieu')
-  //                   ->where($data)
-  //                   /*FIXME: SIMULE an EXCEPT query like:
-  //                   select (_lieu.id,ville,nom,capacite,acces_handi,numresponsable) from _lieu where ville = 'Rennes' EXCEPT (select (_lieu.id,ville,nom,capacite,acces_handi,numresponsable) from _reservation INNER JOIN _lieu on _reservation.lieu=_lieu.id WHERE EXTRACT('DAY' from h_reserv)='16');*/
-  //
-  // }
+  public function getPlaceWithoutReservation($data,$hourData){
+    //on prends d'abord tout les bars réservés à tel date
+    $query=$this->db->select('_reservation.lieu')
+                    ->from('trans._reservation')
+                    ->where($hourData)
+                    ->get()->result_array();
+
+    //on les mets sous forme d'array
+    $placeReserv=array();
+    foreach ($query as $key => $value) {
+      $placeReserv[]=$value['lieu'];
+    }
+
+    //et on les enlève des bars
+    return $this->db->select('*')
+                    ->from('trans._lieu')
+                    ->where($data)
+                    ->where_not_in('_lieu.id',$placeReserv)
+                    ->limit(3)
+                    ->get()->result_array();
+  }
+
+  public function getSceneWithoutReservation($data,$hourData){
+    //on prends d'abord tout les bars réservés à tel date
+    $query=$this->db->select('_reservation.lieu')
+                    ->from('trans._reservation')
+                    ->where($hourData)
+                    ->get()->result_array();
+
+    //on les mets sous forme d'array
+    $placeReserv=array();
+    foreach ($query as $key => $value) {
+      $placeReserv[]=$value['lieu'];
+    }
+
+    //et on les enlève des bars
+    return $this->db->select('*')
+                    ->from('trans._lieu')
+                    ->join('trans._scene','_lieu.id=_scene.id','inner')
+                    ->where($data)
+                    ->where_not_in('_lieu.id',$placeReserv)
+                    ->limit(3)
+                    ->get()->result_array();
+  }
+
+  public function getBarWithoutReservation($data,$hourData){
+    //on prends d'abord tout les bars réservés à tel date
+    $query=$this->db->select('_reservation.lieu')
+                    ->from('trans._reservation')
+                    ->where($hourData)
+                    ->get()->result_array();
+
+    //on les mets sous forme d'array
+    $placeReserv=array();
+    foreach ($query as $key => $value) {
+      $placeReserv[]=$value['lieu'];
+    }
+
+    //print_r($placeReserv);
+
+    //et on les enlève des bars
+    return $this->db->select('*')
+                    ->from('trans._lieu')
+                    ->join('trans._bar','_lieu.id=_bar.id','inner')
+                    ->where($data)
+                    ->where_not_in('_lieu.id',$placeReserv)
+                    ->limit(3)
+                    ->get()->result_array();
+  }
 }
 
 ?>
